@@ -13,23 +13,22 @@ def url_request(url):
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
         'Accept-Language': 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4'}
     r = requests.post(str(url), headers=headers)
-    return(r.text)
+    return(r.content)
 
 
-def main():
+def get_games_calendar():
     result = []
     for i in urls:
-        page = html.parse(i)
-        #t = page.xpath('//*[@id="ctl18_ctl00_mainTable"]/tbody/tr[2]/td[2]/table/tbody/tr') [starts-with(.,"ctl18_ctl00_GamesRepeater_ctl00_trItem")]
+        #page = html.parse(i)
+        page = html.fromstring(url_request(i))
         t = page.xpath('//tr[@id[starts-with(.,"ctl18_ctl00_GamesRepeater")]]')
         for i in t:
             e = i.xpath('./td')
             date = e[4].xpath('./span/text()')[0].split('г.')[0]
             name = e[5].xpath('./a/text()')[0]
             result.append(date + "- " + name)
-    print("\n".join(result))
-    pass
+    return(result)
 
 
 if __name__ == '__main__':
-    main()
+    print(get_games_calendar())
