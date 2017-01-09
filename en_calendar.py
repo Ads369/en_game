@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 #
 import requests
+import en_request
 import lxml.html as html
 
 urls = ['http://72.en.cx/GameCalendar.aspx?t=103316&cntr=100050&zone=Real&status=Coming&p=100196',
@@ -20,7 +21,7 @@ def get_games_calendar():
     result = []
     for i in urls:
         #page = html.parse(i)
-        page = html.fromstring(url_request(i))
+        page = html.fromstring(en_request.url_request(i))
         t = page.xpath('//tr[@id[starts-with(.,"ctl18_ctl00_GamesRepeater")]]')
         for i in t:
             e = i.xpath('./td')

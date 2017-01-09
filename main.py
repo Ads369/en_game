@@ -16,6 +16,7 @@ bot.
 
 import logging
 import os
+import en_calendar
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
 
@@ -40,6 +41,10 @@ def echo(bot, update):
     update.message.reply_text(update.message.text)
 
 
+def get_game_list(bot, update):
+    update.message.reply_text("\n".join(en_calendar.get_games_calendar()))
+
+
 def error(bot, update, error):
     logger.warn('Update "%s" caused error "%s"' % (update, error))
 
@@ -55,6 +60,8 @@ def main():
     # on different commands - answer in Telegram
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("help", help))
+    dp.add_handler(CommandHandler("cal", get_game_list))
+    dp.add_handler(CommandHandler("кал", get_game_list))
 
     # on noncommand i.e message - echo the message on Telegram
     #dp.add_handler(MessageHandler(Filters.text, echo))
