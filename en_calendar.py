@@ -17,15 +17,17 @@ def url_request(url):
 
 
 def main():
+    result = []
     for i in urls:
-        result = []
-        page = url_request(i)
-        t = page.html.xpath('//*[@id="ctl18_ctl00_mainTable"]/tbody/tr[2]/td[2]/table/tbody/tr')[1:]
+        page = html.parse(i)
+        #t = page.xpath('//*[@id="ctl18_ctl00_mainTable"]/tbody/tr[2]/td[2]/table/tbody/tr') [starts-with(.,"ctl18_ctl00_GamesRepeater_ctl00_trItem")]
+        t = page.xpath('//tr[@id[starts-with(.,"ctl18_ctl00_GamesRepeater")]]')
         for i in t:
-            e = t.xpath('./td')
-            date = e[4].split(',')[1]
-            name = e[5]
-
+            e = i.xpath('./td')
+            date = e[4].xpath('./span/text()')[0].split('г.')[0]
+            name = e[5].xpath('./a/text()')[0]
+            result.append(date + "- " + name)
+    print("\n".join(result))
     pass
 
 
