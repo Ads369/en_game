@@ -50,7 +50,7 @@ def error(bot, update, error):
 
 
 def main():
-    os.environ['TOKEN'] = '154399063:AAG18O5K8agrlPBRN2E2GiLP0_yyfNxrBOs'
+    os.environ['TOKEN'] = ''
     # Create the EventHandler and pass it your bot's token.
     updater = Updater(os.environ['TOKEN'])
 
