@@ -100,10 +100,11 @@ def start(update, context):
 	"""Send a message when the command /start is issued."""
 	global Time_timer
 	update.message.reply_text('Game started')
-	t = Timer(Time_timer, hello)
+	t = Timer(Time_timer, game_of_on)
 	t.start()
 
 def finish(update, context):
+	game_of_on()
 	update.message.reply_text('Bay!')
 
 def help(update, context):
@@ -118,17 +119,19 @@ def help(update, context):
 	resetanswer
 	resetgame
 	stats'''
-	update.message.reply_text('Help!')
+	update.message.reply_text(help_mes)
 
 def add(update, context):
 	In_str = update.message.text[4:].strip()
 	add_to_file('game_answer', In_str)
+	update.message.reply_text(len(answer_list))
 
 def addlist(update, context):
 	In_str = update.message.text[8:].split(' ')
 	#print(In_str)
 	for item in In_str:
 		add_to_file('game_answer', item)
+	update.message.reply_text(len(answer_list))
 
 def load(update, context):
 	global answer_list
@@ -138,7 +141,7 @@ def load(update, context):
 def login(update, context):
 	global Players
 	Players[update.message.chat.id] = Player(update.message.chat.id)
-	print(Players)
+	update.message.reply_text(Players)
 
 def resetanswer(update, context):
 	global answer_list
