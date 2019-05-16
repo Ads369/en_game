@@ -100,7 +100,7 @@ def game_of_on():
 def start(update, context):
 	"""Send a message when the command /start is issued."""
 	global Time_timer
-	if update.message.chat.id == "64798180":
+	if update.message.chat.id == 64798180:
 		update.message.reply_text('Game started')
 		game_of_on()
 		t = Timer(Time_timer, game_of_on)
@@ -149,7 +149,7 @@ def login(update, context):
 
 def resetanswer(update, context):
 	global answer_list
-	if update.message.chat.id == "64798180":
+	if update.message.chat.id == 64798180:
 		rewrite_file('game_answer')
 		answer_list = load_game('game_answer')
 		update.message.reply_text(len(answer_list))
@@ -157,7 +157,7 @@ def resetanswer(update, context):
 
 def resetgame(update, context):
 	global Players
-	if update.message.chat.id == "64798180":
+	if update.message.chat.id == 64798180:
 		for player in Players.keys():
 			rewrite_file(player)
 		Players.clear()
@@ -174,7 +174,7 @@ def stats(update, context):
 
 def cheat(update, context):
 	global answer_list,Game,Players,Time_timer
-	if update.message.chat.id == "64798180":
+	if update.message.chat.id == 64798180:
 		update.message.reply_text(answer_list)
 		update.message.reply_text(Game)
 		update.message.reply_text(len(Players))
@@ -182,7 +182,7 @@ def cheat(update, context):
 
 def echo(update, context):
 	"""Echo the user message."""
-	if update.message.text.startswith('.'):
+	if update.message.text.startswith('.') and update.message.chat.id > 0:
 			answer_for_check = update.message.text[1:].strip()
 			if Game and answer_for_check in answer_list:
 				update.message.reply_text('+')
