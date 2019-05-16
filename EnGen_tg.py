@@ -88,7 +88,7 @@ def load_game(filename):
 def game_of_on():
 	#print("hello, world")
 	global Game
-	If Game
+	If Game == True
 		Game = False
 	else
 		Game = True
