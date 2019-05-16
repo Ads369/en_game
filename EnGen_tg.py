@@ -122,7 +122,9 @@ def help(update, context):
 	update.message.reply_text(help_mes)
 
 def add(update, context):
+	update.message.reply_text(update.message.text)
 	In_str = update.message.text[4:].strip()
+	update.message.reply_text(In_str)
 	add_to_file('game_answer', In_str)
 	update.message.reply_text(len(answer_list))
 
