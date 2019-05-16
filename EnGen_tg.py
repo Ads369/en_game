@@ -88,9 +88,9 @@ def load_game(filename):
 def game_of_on():
 	#print("hello, world")
 	global Game
-	If Game == True
+	if Game == True:
 		Game = False
-	else
+	else:
 		Game = True
 
 
@@ -122,7 +122,7 @@ def help(update, context):
 
 def add(update, context):
 	In_str = update.message.text[4:].strip()
-			add_to_file('game_answer', In_str)
+	add_to_file('game_answer', In_str)
 
 def addlist(update, context):
 	In_str = update.message.text[8:].split(' ')
@@ -190,7 +190,7 @@ def main():
     # Create the Updater and pass it your bot's token.
     # Make sure to set use_context=True to use the new context based callbacks
     # Post version 12 this will no longer be necessary
-    updater = Updater("TOKEN", use_context=True)
+    updater = Updater("238706968:AAErHt_qyT5ZZJc4PoWgAWqeo9tFIS8msF8", use_context=True)
 
     # Get the dispatcher to register handlers
     dp = updater.dispatcher
