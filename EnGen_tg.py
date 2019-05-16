@@ -167,11 +167,11 @@ def stats(update, context):
 	#print(result)
 	update.message.reply_text(result)
 
-def chaet(update, context):
+def cheat(update, context):
 	global answer_list,Game,Players,Time_timer
 	update.message.reply_text(answer_list)
 	update.message.reply_text(Game)
-	update.message.reply_text(Players)
+	update.message.reply_text(len(Players))
 	update.message.reply_text(Time_timer)
 
 def echo(update, context):
@@ -214,7 +214,7 @@ def main():
     dp.add_handler(CommandHandler("resetgame", resetgame)) #Kick all playesrs
     #dp.add_handler(CommandHandler("setuptest", setuptest)) #test login 3 bots
     dp.add_handler(CommandHandler("stats", stats)) #stats of game
-    dp.add_handler(CommandHandler("chaet", chaet)) #stats of game
+    dp.add_handler(CommandHandler("cheat", cheat)) #stats of game
 
 
     # on noncommand i.e message - echo the message on Telegram
