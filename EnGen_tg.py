@@ -122,11 +122,10 @@ def help(update, context):
 	update.message.reply_text(help_mes)
 
 def add(update, context):
-	update.message.reply_text(update.message.text)
 	In_str = update.message.text[4:].strip()
-	update.message.reply_text(In_str)
 	add_to_file('game_answer', In_str)
-	update.message.reply_text(len(answer_list))
+	update.message.reply_text('Answer:' + In_str)
+
 
 def addlist(update, context):
 	In_str = update.message.text[8:].split(' ')
@@ -143,7 +142,7 @@ def load(update, context):
 def login(update, context):
 	global Players
 	Players[update.message.chat.id] = Player(update.message.chat.id)
-	update.message.reply_text(Players)
+	update.message.reply_text(update.message.chat.id)
 
 def resetanswer(update, context):
 	global answer_list
