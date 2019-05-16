@@ -100,14 +100,16 @@ def game_of_on():
 def start(update, context):
 	"""Send a message when the command /start is issued."""
 	global Time_timer
-	update.message.reply_text('Game started')
-	game_of_on()
-	t = Timer(Time_timer, game_of_on)
-	t.start()
+	if update.message.chat.id == "64798180":
+		update.message.reply_text('Game started')
+		game_of_on()
+		t = Timer(Time_timer, game_of_on)
+		t.start()
 
 def finish(update, context):
-	game_of_on()
-	update.message.reply_text('Game over')
+	if update.message.chat.id == "64798180":
+		game_of_on()
+		update.message.reply_text('Game over')
 
 def help(update, context):
 	"""Send a message when the command /help is issued."""
@@ -147,17 +149,19 @@ def login(update, context):
 
 def resetanswer(update, context):
 	global answer_list
-	rewrite_file('game_answer')
-	answer_list = load_game('game_answer')
-	update.message.reply_text(len(answer_list))
-	#print(answer_list)
+	if update.message.chat.id == "64798180":
+		rewrite_file('game_answer')
+		answer_list = load_game('game_answer')
+		update.message.reply_text(len(answer_list))
+		#print(answer_list)
 
 def resetgame(update, context):
 	global Players
-	for player in Players.keys():
-		rewrite_file(player)
-	Players.clear()
-	update.message.reply_text('Game reseted!')
+	if update.message.chat.id == "64798180":
+		for player in Players.keys():
+			rewrite_file(player)
+		Players.clear()
+		update.message.reply_text('Game reseted!')
 
 def stats(update, context):
 	total_answer = len(answer_list)
@@ -165,14 +169,16 @@ def stats(update, context):
 	for player in Players.values():
 		result += '{}: {}/{}\n'.format(player.show_stats()[0], player.show_stats()[-1], total_answer)
 	#print(result)
+	update.message.reply_text(Game)
 	update.message.reply_text(result)
 
 def cheat(update, context):
 	global answer_list,Game,Players,Time_timer
-	update.message.reply_text(answer_list)
-	update.message.reply_text(Game)
-	update.message.reply_text(len(Players))
-	update.message.reply_text(Time_timer)
+	if update.message.chat.id == "64798180":
+		update.message.reply_text(answer_list)
+		update.message.reply_text(Game)
+		update.message.reply_text(len(Players))
+		update.message.reply_text(Time_timer)
 
 def echo(update, context):
 	"""Echo the user message."""
