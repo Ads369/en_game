@@ -100,6 +100,7 @@ def start(update, context):
 	"""Send a message when the command /start is issued."""
 	global Time_timer
 	update.message.reply_text('Game started')
+	game_of_on()
 	t = Timer(Time_timer, game_of_on)
 	t.start()
 
