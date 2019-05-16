@@ -34,8 +34,8 @@ logger = logging.getLogger(__name__)
 answer_list = ()
 Game = False
 Players = {}
-#Time_timer = 7200.0
-Time_timer = 30.0
+Time_timer = 7200.0
+#Time_timer = 30.0
 
 # Define a class for players in game
 class Player (object):
@@ -52,7 +52,8 @@ class Player (object):
 		if len(self.answer) != self.count_answer:
 			self.count_answer = len(self.answer)
 			string_log = '{} - {} - {}'.format(id, answer_in, datetime.today().isoformat(sep='T'))
-			add_to_file(self.id, string_log)
+			#add_to_file(self.id, string_log)
+			return(string_log)
 
 	def show_stats(self):
 		return([self.id,self.answer,self.count_answer])
@@ -106,7 +107,7 @@ def start(update, context):
 
 def finish(update, context):
 	game_of_on()
-	update.message.reply_text('Bay!')
+	update.message.reply_text('Game over')
 
 def help(update, context):
 	"""Send a message when the command /help is issued."""
@@ -126,7 +127,6 @@ def add(update, context):
 	In_str = update.message.text[4:].strip()
 	add_to_file('game_answer', In_str)
 	update.message.reply_text('Answer:' + In_str)
-
 
 def addlist(update, context):
 	In_str = update.message.text[8:].split(' ')
@@ -180,8 +180,8 @@ def echo(update, context):
 			answer_for_check = update.message.text[1:].strip()
 			if Game and answer_for_check in answer_list:
 				update.message.reply_text('+')
-				Players[update.message.chat.id].check_answer(answer_for_check)
-				print(Players[update.message.chat.id].show_stats())
+				result = Players[update.message.chat.id].check_answer(answer_for_check)
+				update.message.reply_text(Players[update.message.chat.id].show_stats())
 			else:
 				update.message.reply_text('-')
 
